@@ -10,12 +10,14 @@ public class GameUi : MonoBehaviour
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private Button restart;
-    
+    [SerializeField] private GameObject gameFinishedPanel;
+
     private void Start()
     {
         score.SetText("Score: 0");
         controller.ScoreChanged += OnScoreChanged;
         controller.GameOver += OnGameOver;
+        controller.GameFinished += OnGameFinished;
         restart.onClick.AddListener(RestartGame);
     }
 
@@ -28,6 +30,12 @@ public class GameUi : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
     }
+
+    private void OnGameFinished()
+    {
+        gameFinishedPanel.SetActive(true);
+    }
+
     private void OnScoreChanged()
     {
         score.SetText("Score: " + controller.CurrentScore.ToString());

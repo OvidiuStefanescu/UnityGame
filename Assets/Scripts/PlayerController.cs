@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed = 5.0f;
-    [SerializeField] private float accelerateRate = 0.1f;
-    [SerializeField] private float sprintMultiplier = 10.0f;
+    [SerializeField] private float movementSpeed = 250.0f;
+    [SerializeField] private float accelerateRate = 0.5f;
+    [SerializeField] private float sprintMultiplier = 15.0f;
 
     private int currentScore = 0;
     private bool isSprinting = false;
@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public event Action ScoreChanged;
     public event Action GameOver;
+    public event Action GameFinished;
 
     private void Update()
     {
@@ -89,5 +90,11 @@ public class PlayerController : MonoBehaviour
             GameOver?.Invoke();
             isGameOver = true;
         }
+    }
+
+    public void FireGameOver()
+    {
+        GameFinished?.Invoke();
+        isGameOver = true;
     }
 }
